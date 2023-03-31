@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table cellspacing="20px">
+
+    <tr>
+
+        <td>@Html.ActionLink("Projects", "Index", new { tableName = "Projects" }, htmlAttributes: null)</td>
+
+    </tr>
+
+    <tr>
+
+        <td>@Html.ActionLink("Products", "Index", new { tableName = "Products" }, htmlAttributes: null)</td>
+
+    </tr>
+
+    <tr>
+
+        <td>@Html.ActionLink("mstr_Country", "Index", new { tableName = "mstr_Country" }, htmlAttributes: null)</td>
+
+    </tr>
+
+</table>
+
+@*//@foreach(var i in )*@
+
+
+
+<div id="TableContainer"></div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#TableContainer').jtable({
+            title: 'Record Listing',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'Id', //'Description ASC',Set default sorting //PHANI
+            actions: {
+                listAction: '@ViewBag.ListUrl',
+                deleteAction: '@ViewBag.DeleteUrl',
+                updateAction: '@ViewBag.UpdateUrl',
+                createAction: '@ViewBag.AddUrl'
+            },
+            fields: @Html.Raw(ViewBag.FieldData)
+
+            });
+
+        //Load student list from server
+        $('#TableContainer').jtable('load');
+    });
+
+</script>
